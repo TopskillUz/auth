@@ -1,0 +1,60 @@
+//python -m grpc_tools.protoc -I protos/users --python_out=. --grpc_python_out=. protos/users/*.proto
+syntax = "proto3";
+package auth;
+//import "users.proto";
+import "google/protobuf/wrappers.proto";
+
+
+message User {
+  int32 id = 1;
+  string username = 2;
+  string password = 3;
+  string email = 4;
+}
+
+message RegisterUserRequest {
+  string username = 1;
+  string password = 2;
+  string email = 3;
+}
+
+message RegisterUserResponse {
+  User success_payload = 1;
+  string error_payload = 2;
+  bool error = 3;
+  int32 status_code = 4;
+}
+
+message CheckUsernameRequest {
+  string username = 1;
+}
+
+service AuthService {
+  rpc register(RegisterUserRequest) returns (RegisterUserResponse);
+  rpc check_username (CheckUsernameRequest) returns (google.protobuf.BoolValue);
+}
+
+
+//message RegisterUserRequest {
+//  string username = 1;
+//  string password = 2;
+//  string email = 3;
+//}
+
+//message  CreateUserResponse {
+//  int32 id = 1;
+//  string username = 2;
+//  string email = 3;
+//}
+
+
+//
+//message CheckUsernameResponse {
+//  bool is_exists = 1;
+//    }
+//
+//service UserService {
+////  rpc create_user (CreateUserRequest) returns (CreateUserResponse);
+
+//  rpc check_username (CheckUsernameRequest) returns (google.protobuf.BoolValue);
+//}
