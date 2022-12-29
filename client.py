@@ -1,10 +1,14 @@
+import os
+
 import grpc
 
 import auth_pb2, auth_pb2_grpc
 
 
 class AuthClient:
-    def __init__(self, host='localhost', server_port=99998):
+    user_host = os.environ.get('USER_HOST', 'localhost')
+
+    def __init__(self, host=user_host, server_port=9998):
         self.host = host
         self.server_port = server_port
 

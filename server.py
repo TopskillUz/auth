@@ -35,7 +35,7 @@ class AuthServicer(auth_pb2_grpc.AuthServiceServicer):
 def serve():
     server = grpc.server(futures.ThreadPoolExecutor(max_workers=10))
     auth_pb2_grpc.add_AuthServiceServicer_to_server(AuthServicer(), server)
-    server.add_insecure_port(f"[::]:99999")
+    server.add_insecure_port(f"[::]:9999")
     server.start()
     server.wait_for_termination()
 
