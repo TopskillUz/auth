@@ -1,9 +1,8 @@
-import random
 from concurrent import futures
 
 import grpc
 
-import auth_pb2_grpc, auth_pb2
+from grpc_generated_files import auth_pb2_grpc, auth_pb2
 from client import AuthClient
 
 
@@ -16,7 +15,7 @@ class AuthServicer(auth_pb2_grpc.AuthServiceServicer):
         resp = auth_client.check_username(request.username)
 
         if not bool(resp.value):
-            user = auth_pb2.User(id=1, username=request.username, password=request.password, email=request.email)
+            user = auth_pb2.User(id=1, username='test4', password=request.password, email=request.email)
             response = auth_pb2.RegisterUserResponse(
                 success_payload=user,
                 error=False,

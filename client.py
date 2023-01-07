@@ -2,17 +2,15 @@ import os
 
 import grpc
 
-import auth_pb2, auth_pb2_grpc
+from grpc_generated_files import auth_pb2, auth_pb2_grpc
 
 
 class AuthClient:
-    user_host = os.environ.get('USER_HOST', 'localhost')
+    service = os.environ.get('USER_SVC_ADDRESS', 'localhost:9998')
 
-    def __init__(self, host=user_host, server_port=9998):
-        self.host = host
-        self.server_port = server_port
-
-        self.channel = grpc.insecure_channel(f'{self.host}:{self.server_port}')
+    def __init__(self, service=service):
+        self.service = service
+        self.channel = grpc.insecure_channel(service)
         self.stub = auth_pb2_grpc.AuthServiceStub(self.channel)
 
     def check_username(self, username):
