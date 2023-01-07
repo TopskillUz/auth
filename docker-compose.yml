@@ -7,13 +7,13 @@ services:
       dockerfile: Dockerfile
     image: auth:latest
     environment:
-      USER_HOST: user
+      USER_SVC_ADDRESS: "user:9998"
     volumes:
       - .:/service
     networks:
-      - gateway_microservices
+      - microservices
     restart: always
 
 networks:
-  gateway_microservices:
+  microservices:
     external: true

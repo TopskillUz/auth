@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: auth
+  labels:
+    app: auth
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: auth
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxSurge: 3
+  template:
+    metadata:
+      labels:
+        app: auth
+    spec:
+      containers:
+        - name: auth
+          image: auth:latest
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 9999
+          envFrom:
+            - configMapRef:
+                name: auth-configmap
+            - secretRef:
+                name: auth-secret
+#          livenessProbe:
+#            exec:
+#              command: [ "/bin/grpc_health_probe", "-addr=:9999", "-connect-timeout=100ms", "-rpc-timeout=150ms" ]
+#            initialDelaySeconds: 5
+      restartPolicy: Always
