@@ -1,0 +1,9 @@
+grpcio
+grpcio_tools
+pydantic
+sqlalchemy
+asyncpg
+passlib[bcrypt]
+alembic
+python-dotenv
+pyjwt[crypto]

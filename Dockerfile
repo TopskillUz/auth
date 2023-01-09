@@ -4,8 +4,8 @@ FROM python:3.10-slim-bullseye
 ENV PYTHONDONTWRITEBYTECODE 1
 ENV PYTHONUNBUFFERED 1
 
-RUN pip install --upgrade pip
-RUN pip install grpcio grpcio-tools
+
+#RUN pip install grpcio grpcio-tools
 
 RUN mkdir /service
 WORKDIR /service
@@ -13,9 +13,12 @@ WORKDIR /service
 COPY ./protos /service/protos/
 COPY . /service/
 
+RUN pip install --upgrade pip && pip install -r requirements.txt
+
 #RUN python -m grpc_tools.protoc -I protos --python_out=grpc_generated_files --grpc_python_out=grpc_generated_files protos/*.proto
 
-ENTRYPOINT ["python", "client.py"]
-
 EXPOSE 9999
-ENTRYPOINT ["python", "server.py"]
+
+COPY entrypoint.sh /
+RUN chmod +x /entrypoint.sh
+ENTRYPOINT ["sh", "/entrypoint.sh"]
