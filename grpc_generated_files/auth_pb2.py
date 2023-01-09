@@ -14,7 +14,7 @@ _sym_db = _symbol_database.Default()
 from google.protobuf import wrappers_pb2 as google_dot_protobuf_dot_wrappers__pb2
 
 
-DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1egoogle/protobuf/wrappers.proto\"E\n\x04User\x12\n\n\x02id\x18\x01 \x01(\x05\x12\x10\n\x08username\x18\x02 \x01(\t\x12\x10\n\x08password\x18\x03 \x01(\t\x12\r\n\x05\x65mail\x18\x04 \x01(\t\"H\n\x13RegisterUserRequest\x12\x10\n\x08username\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\x12\r\n\x05\x65mail\x18\x03 \x01(\t\"v\n\x14RegisterUserResponse\x12#\n\x0fsuccess_payload\x18\x01 \x01(\x0b\x32\n.auth.User\x12\x15\n\rerror_payload\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\x12\x13\n\x0bstatus_code\x18\x04 \x01(\x05\"(\n\x14\x43heckUsernameRequest\x12\x10\n\x08username\x18\x01 \x01(\t2\x9a\x01\n\x0b\x41uthService\x12\x41\n\x08register\x12\x19.auth.RegisterUserRequest\x1a\x1a.auth.RegisterUserResponse\x12H\n\x0e\x63heck_username\x12\x1a.auth.CheckUsernameRequest\x1a\x1a.google.protobuf.BoolValueb\x06proto3')
+DESCRIPTOR = _descriptor_pool.Default().AddSerializedFile(b'\n\nauth.proto\x12\x04\x61uth\x1a\x1egoogle/protobuf/wrappers.proto\"l\n\x04User\x12\n\n\x02id\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\r\n\x05phone\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x12\n\nfirst_name\x18\x05 \x01(\t\x12\x13\n\x0bmiddle_name\x18\x06 \x01(\t\"\x81\x01\n\x13RegisterUserRequest\x12\x10\n\x08password\x18\x01 \x01(\t\x12\r\n\x05\x65mail\x18\x02 \x01(\t\x12\r\n\x05phone\x18\x03 \x01(\t\x12\x11\n\tlast_name\x18\x04 \x01(\t\x12\x12\n\nfirst_name\x18\x05 \x01(\t\x12\x13\n\x0bmiddle_name\x18\x06 \x01(\t\"v\n\x14RegisterUserResponse\x12#\n\x0fsuccess_payload\x18\x01 \x01(\x0b\x32\n.auth.User\x12\x15\n\rerror_payload\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\x12\x13\n\x0bstatus_code\x18\x04 \x01(\x05\"(\n\x14\x43heckUsernameRequest\x12\x10\n\x08username\x18\x01 \x01(\t\"/\n\x0cLoginRequest\x12\r\n\x05\x65mail\x18\x01 \x01(\t\x12\x10\n\x08password\x18\x02 \x01(\t\":\n\x0bTokenSchema\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\x12\x15\n\rrefresh_token\x18\x02 \x01(\t\"v\n\rLoginResponse\x12*\n\x0fsuccess_payload\x18\x01 \x01(\x0b\x32\x11.auth.TokenSchema\x12\x15\n\rerror_payload\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\x12\x13\n\x0bstatus_code\x18\x04 \x01(\x05\",\n\x13RefreshTokenRequest\x12\x15\n\rrefresh_token\x18\x01 \x01(\t\"}\n\x14RefreshTokenResponse\x12*\n\x0fsuccess_payload\x18\x01 \x01(\x0b\x32\x11.auth.TokenSchema\x12\x15\n\rerror_payload\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\x12\x13\n\x0bstatus_code\x18\x04 \x01(\x05\",\n\x14ValidateTokenRequest\x12\x14\n\x0c\x61\x63\x63\x65ss_token\x18\x01 \x01(\t\"w\n\x15ValidateTokenResponse\x12#\n\x0fsuccess_payload\x18\x01 \x01(\x0b\x32\n.auth.User\x12\x15\n\rerror_payload\x18\x02 \x01(\t\x12\r\n\x05\x65rror\x18\x03 \x01(\x08\x12\x13\n\x0bstatus_code\x18\x04 \x01(\x05\x32\xe6\x02\n\x0b\x41uthService\x12\x41\n\x08register\x12\x19.auth.RegisterUserRequest\x1a\x1a.auth.RegisterUserResponse\x12\x30\n\x05login\x12\x12.auth.LoginRequest\x1a\x13.auth.LoginResponse\x12\x46\n\rrefresh_token\x12\x19.auth.RefreshTokenRequest\x1a\x1a.auth.RefreshTokenResponse\x12P\n\x15validate_access_token\x12\x1a.auth.ValidateTokenRequest\x1a\x1b.auth.ValidateTokenResponse\x12H\n\x0e\x63heck_username\x12\x1a.auth.CheckUsernameRequest\x1a\x1a.google.protobuf.BoolValueb\x06proto3')
 
 _builder.BuildMessageAndEnumDescriptors(DESCRIPTOR, globals())
 _builder.BuildTopDescriptorsAndMessages(DESCRIPTOR, 'auth_pb2', globals())
@@ -22,13 +22,27 @@ if _descriptor._USE_C_DESCRIPTORS == False:
 
   DESCRIPTOR._options = None
   _USER._serialized_start=52
-  _USER._serialized_end=121
-  _REGISTERUSERREQUEST._serialized_start=123
-  _REGISTERUSERREQUEST._serialized_end=195
-  _REGISTERUSERRESPONSE._serialized_start=197
-  _REGISTERUSERRESPONSE._serialized_end=315
-  _CHECKUSERNAMEREQUEST._serialized_start=317
-  _CHECKUSERNAMEREQUEST._serialized_end=357
-  _AUTHSERVICE._serialized_start=360
-  _AUTHSERVICE._serialized_end=514
+  _USER._serialized_end=160
+  _REGISTERUSERREQUEST._serialized_start=163
+  _REGISTERUSERREQUEST._serialized_end=292
+  _REGISTERUSERRESPONSE._serialized_start=294
+  _REGISTERUSERRESPONSE._serialized_end=412
+  _CHECKUSERNAMEREQUEST._serialized_start=414
+  _CHECKUSERNAMEREQUEST._serialized_end=454
+  _LOGINREQUEST._serialized_start=456
+  _LOGINREQUEST._serialized_end=503
+  _TOKENSCHEMA._serialized_start=505
+  _TOKENSCHEMA._serialized_end=563
+  _LOGINRESPONSE._serialized_start=565
+  _LOGINRESPONSE._serialized_end=683
+  _REFRESHTOKENREQUEST._serialized_start=685
+  _REFRESHTOKENREQUEST._serialized_end=729
+  _REFRESHTOKENRESPONSE._serialized_start=731
+  _REFRESHTOKENRESPONSE._serialized_end=856
+  _VALIDATETOKENREQUEST._serialized_start=858
+  _VALIDATETOKENREQUEST._serialized_end=902
+  _VALIDATETOKENRESPONSE._serialized_start=904
+  _VALIDATETOKENRESPONSE._serialized_end=1023
+  _AUTHSERVICE._serialized_start=1026
+  _AUTHSERVICE._serialized_end=1384
 # @@protoc_insertion_point(module_scope)

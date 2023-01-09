@@ -16,21 +16,54 @@ class AuthServiceStub(object):
             channel: A grpc.Channel.
         """
         self.register = channel.unary_unary(
-            '/auth.AuthService/register',
-            request_serializer=auth__pb2.RegisterUserRequest.SerializeToString,
-            response_deserializer=auth__pb2.RegisterUserResponse.FromString,
-        )
+                '/auth.AuthService/register',
+                request_serializer=auth__pb2.RegisterUserRequest.SerializeToString,
+                response_deserializer=auth__pb2.RegisterUserResponse.FromString,
+                )
+        self.login = channel.unary_unary(
+                '/auth.AuthService/login',
+                request_serializer=auth__pb2.LoginRequest.SerializeToString,
+                response_deserializer=auth__pb2.LoginResponse.FromString,
+                )
+        self.refresh_token = channel.unary_unary(
+                '/auth.AuthService/refresh_token',
+                request_serializer=auth__pb2.RefreshTokenRequest.SerializeToString,
+                response_deserializer=auth__pb2.RefreshTokenResponse.FromString,
+                )
+        self.validate_access_token = channel.unary_unary(
+                '/auth.AuthService/validate_access_token',
+                request_serializer=auth__pb2.ValidateTokenRequest.SerializeToString,
+                response_deserializer=auth__pb2.ValidateTokenResponse.FromString,
+                )
         self.check_username = channel.unary_unary(
-            '/auth.AuthService/check_username',
-            request_serializer=auth__pb2.CheckUsernameRequest.SerializeToString,
-            response_deserializer=google_dot_protobuf_dot_wrappers__pb2.BoolValue.FromString,
-        )
+                '/auth.AuthService/check_username',
+                request_serializer=auth__pb2.CheckUsernameRequest.SerializeToString,
+                response_deserializer=google_dot_protobuf_dot_wrappers__pb2.BoolValue.FromString,
+                )
 
 
 class AuthServiceServicer(object):
     """Missing associated documentation comment in .proto file."""
 
     def register(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def login(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def refresh_token(self, request, context):
+        """Missing associated documentation comment in .proto file."""
+        context.set_code(grpc.StatusCode.UNIMPLEMENTED)
+        context.set_details('Method not implemented!')
+        raise NotImplementedError('Method not implemented!')
+
+    def validate_access_token(self, request, context):
         """Missing associated documentation comment in .proto file."""
         context.set_code(grpc.StatusCode.UNIMPLEMENTED)
         context.set_details('Method not implemented!')
@@ -45,56 +78,122 @@ class AuthServiceServicer(object):
 
 def add_AuthServiceServicer_to_server(servicer, server):
     rpc_method_handlers = {
-        'register': grpc.unary_unary_rpc_method_handler(
-            servicer.register,
-            request_deserializer=auth__pb2.RegisterUserRequest.FromString,
-            response_serializer=auth__pb2.RegisterUserResponse.SerializeToString,
-        ),
-        'check_username': grpc.unary_unary_rpc_method_handler(
-            servicer.check_username,
-            request_deserializer=auth__pb2.CheckUsernameRequest.FromString,
-            response_serializer=google_dot_protobuf_dot_wrappers__pb2.BoolValue.SerializeToString,
-        ),
+            'register': grpc.unary_unary_rpc_method_handler(
+                    servicer.register,
+                    request_deserializer=auth__pb2.RegisterUserRequest.FromString,
+                    response_serializer=auth__pb2.RegisterUserResponse.SerializeToString,
+            ),
+            'login': grpc.unary_unary_rpc_method_handler(
+                    servicer.login,
+                    request_deserializer=auth__pb2.LoginRequest.FromString,
+                    response_serializer=auth__pb2.LoginResponse.SerializeToString,
+            ),
+            'refresh_token': grpc.unary_unary_rpc_method_handler(
+                    servicer.refresh_token,
+                    request_deserializer=auth__pb2.RefreshTokenRequest.FromString,
+                    response_serializer=auth__pb2.RefreshTokenResponse.SerializeToString,
+            ),
+            'validate_access_token': grpc.unary_unary_rpc_method_handler(
+                    servicer.validate_access_token,
+                    request_deserializer=auth__pb2.ValidateTokenRequest.FromString,
+                    response_serializer=auth__pb2.ValidateTokenResponse.SerializeToString,
+            ),
+            'check_username': grpc.unary_unary_rpc_method_handler(
+                    servicer.check_username,
+                    request_deserializer=auth__pb2.CheckUsernameRequest.FromString,
+                    response_serializer=google_dot_protobuf_dot_wrappers__pb2.BoolValue.SerializeToString,
+            ),
     }
     generic_handler = grpc.method_handlers_generic_handler(
-        'auth.AuthService', rpc_method_handlers)
+            'auth.AuthService', rpc_method_handlers)
     server.add_generic_rpc_handlers((generic_handler,))
 
 
-# This class is part of an EXPERIMENTAL API.
+ # This class is part of an EXPERIMENTAL API.
 class AuthService(object):
     """Missing associated documentation comment in .proto file."""
 
     @staticmethod
     def register(request,
-                 target,
-                 options=(),
-                 channel_credentials=None,
-                 call_credentials=None,
-                 insecure=False,
-                 compression=None,
-                 wait_for_ready=None,
-                 timeout=None,
-                 metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/auth.AuthService/register',
-                                             auth__pb2.RegisterUserRequest.SerializeToString,
-                                             auth__pb2.RegisterUserResponse.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            auth__pb2.RegisterUserRequest.SerializeToString,
+            auth__pb2.RegisterUserResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def login(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/auth.AuthService/login',
+            auth__pb2.LoginRequest.SerializeToString,
+            auth__pb2.LoginResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def refresh_token(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/auth.AuthService/refresh_token',
+            auth__pb2.RefreshTokenRequest.SerializeToString,
+            auth__pb2.RefreshTokenResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+
+    @staticmethod
+    def validate_access_token(request,
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
+        return grpc.experimental.unary_unary(request, target, '/auth.AuthService/validate_access_token',
+            auth__pb2.ValidateTokenRequest.SerializeToString,
+            auth__pb2.ValidateTokenResponse.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
 
     @staticmethod
     def check_username(request,
-                       target,
-                       options=(),
-                       channel_credentials=None,
-                       call_credentials=None,
-                       insecure=False,
-                       compression=None,
-                       wait_for_ready=None,
-                       timeout=None,
-                       metadata=None):
+            target,
+            options=(),
+            channel_credentials=None,
+            call_credentials=None,
+            insecure=False,
+            compression=None,
+            wait_for_ready=None,
+            timeout=None,
+            metadata=None):
         return grpc.experimental.unary_unary(request, target, '/auth.AuthService/check_username',
-                                             auth__pb2.CheckUsernameRequest.SerializeToString,
-                                             google_dot_protobuf_dot_wrappers__pb2.BoolValue.FromString,
-                                             options, channel_credentials,
-                                             insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
+            auth__pb2.CheckUsernameRequest.SerializeToString,
+            google_dot_protobuf_dot_wrappers__pb2.BoolValue.FromString,
+            options, channel_credentials,
+            insecure, call_credentials, compression, wait_for_ready, timeout, metadata)
